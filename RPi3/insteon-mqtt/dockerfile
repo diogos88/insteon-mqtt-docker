@@ -1,0 +1,24 @@
+FROM resin/raspberrypi3-python:3.6
+MAINTAINER Diogo Soares
+
+# Enable systemd
+ENV INITSYSTEM on
+
+# Move to tmp folder
+RUN cd /tmp
+
+# Install Insteon_MQTT
+RUN git clone https://github.com/TD22057/insteon-mqtt.git && \
+cd insteon-mqtt/ && \
+git checkout 5b3543eab722e28872b800d0112208398071e377 && \
+pip3 install .
+
+# Create folder structure
+RUN mkdir /opt/insteon-mqtt/ && \
+mkdir /opt/insteon-mqtt/config/
+
+VOLUME /opt/insteon-mqtt/
+
+ADD ./config.yaml /opt/insteon-mqtt/
+
+ENTRYPOINT []

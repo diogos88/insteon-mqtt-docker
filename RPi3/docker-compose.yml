@@ -1,0 +1,9 @@
+version: "3"
+services:
+  insteon_mqtt:
+    build: ./insteon-mqtt
+    restart: always
+    privileged: true
+    command: insteon-mqtt /opt/insteon-mqtt/config.yaml start
+    volumes:
+     - /data/insteon_mqtt2/:/opt/insteon-mqtt/
